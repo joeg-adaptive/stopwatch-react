@@ -1,45 +1,37 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import Timer from './timer/timer.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+	//const [timer, setTimer] = useState(0)
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+	return (
+		<html>
+			<head>
+				<title>Stopwatch</title>
+				<link rel='stylesheet' href='stopwatch.css' />
+			</head>
+			<body>
+				<main class='stopwatchBody'>
+					<div class='stopwatchTime'>
+						<span id='stopWatchClock' data-id='stopWatchClock'>
+							<Timer />
+						</span>
+					</div>
+					<div class='stopwatchButtons'>
+						<button class='reset' data-id='resetLap'>
+							Reset
+						</button>
+						<button class='start' data-id='startStop'>
+							Start
+						</button>
+					</div>
+					<div class='stopWatchLaps' data-id='stopWatchLaps'></div>
+				</main>
+			</body>
+		</html>
+	)
 }
 
 export default App
