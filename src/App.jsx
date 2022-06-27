@@ -1,36 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import Timer from './timer/timer.jsx'
+import Buttons from './buttons/buttons'
 
 function App() {
-	//const [timer, setTimer] = useState(0)
-
+	const [startStop, setStartStop] = useState(false)
+	const [resetLap, setResetLap] = useState(false)
 	return (
-		<html>
-			<head>
-				<title>Stopwatch</title>
-				<link rel='stylesheet' href='stopwatch.css' />
-			</head>
-			<body>
-				<main class='stopwatchBody'>
-					<div class='stopwatchTime'>
+		<div>
+			<div>
+				<main className='stopwatchBody'>
+					<div className='stopwatchTime'>
 						<span id='stopWatchClock' data-id='stopWatchClock'>
-							<Timer />
+							<Timer startStop={startStop} />
 						</span>
 					</div>
-					<div class='stopwatchButtons'>
-						<button class='reset' data-id='resetLap'>
-							Reset
-						</button>
-						<button class='start' data-id='startStop'>
-							Start
-						</button>
-					</div>
-					<div class='stopWatchLaps' data-id='stopWatchLaps'></div>
+					<Buttons
+						startStop={startStop}
+						setStartStop={setStartStop}
+						resetLap={resetLap}
+						setResetLap={setResetLap}
+					/>
+					<div className='stopWatchLaps' data-id='stopWatchLaps'></div>
 				</main>
-			</body>
-		</html>
+			</div>
+		</div>
 	)
 }
 
