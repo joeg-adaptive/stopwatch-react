@@ -5,19 +5,15 @@ import { StopWatchProvider } from './StopWatchContext'
 function App() {
 	return (
 		<StopWatchProvider>
-			<div>
-				<div>
-					<main className='stopwatchBody'>
-						<div className='stopwatchTime'>
-							<span id='stopWatchClock' data-id='stopWatchClock'>
-								<Timer />
-							</span>
-						</div>
-						<Buttons />
-						<div className='stopWatchLaps' data-id='stopWatchLaps'></div>
-					</main>
+			<main className='stopwatchBody'>
+				<div className='stopwatchTime'>
+					<span id='stopWatchClock' data-id='stopWatchClock'>
+						<Timer />
+					</span>
 				</div>
-			</div>
+				<Buttons />
+				<div className='stopWatchLaps' data-id='stopWatchLaps'></div>
+			</main>
 		</StopWatchProvider>
 	)
 }

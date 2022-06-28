@@ -17,7 +17,7 @@ export default function Buttons() {
 					resetLapButton()
 				}}
 			>
-				{resetLap ? 'Lap' : 'Reset'}
+				{startStop ? 'Lap' : 'Reset'}
 			</button>
 			<button
 				className={startStop ? 'stop' : 'start'}
