@@ -1,31 +1,24 @@
-import { useEffect, useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
-import Timer from './timer/timer.jsx'
-import Buttons from './buttons/buttons'
+import Timer from './components/Timer/Timer.jsx'
+import Buttons from './components/Buttons/Buttons.jsx'
+import { StopWatchProvider } from './StopWatchContext'
 
 function App() {
-	const [startStop, setStartStop] = useState(false)
-	const [resetLap, setResetLap] = useState(false)
 	return (
-		<div>
+		<StopWatchProvider>
 			<div>
-				<main className='stopwatchBody'>
-					<div className='stopwatchTime'>
-						<span id='stopWatchClock' data-id='stopWatchClock'>
-							<Timer startStop={startStop} />
-						</span>
-					</div>
-					<Buttons
-						startStop={startStop}
-						setStartStop={setStartStop}
-						resetLap={resetLap}
-						setResetLap={setResetLap}
-					/>
-					<div className='stopWatchLaps' data-id='stopWatchLaps'></div>
-				</main>
+				<div>
+					<main className='stopwatchBody'>
+						<div className='stopwatchTime'>
+							<span id='stopWatchClock' data-id='stopWatchClock'>
+								<Timer />
+							</span>
+						</div>
+						<Buttons />
+						<div className='stopWatchLaps' data-id='stopWatchLaps'></div>
+					</main>
+				</div>
 			</div>
-		</div>
+		</StopWatchProvider>
 	)
 }
 

@@ -1,5 +1,5 @@
 export function getFormattedTime(timeInMilliseconds) {
-	//console.log(timeInMilliseconds)
+	//(timeInMilliseconds)
 	let formattedMinutes = Math.floor(timeInMilliseconds / 60000)
 		.toString()
 		.padStart(2, '0')
