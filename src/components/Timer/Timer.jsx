@@ -1,9 +1,9 @@
-import React from 'react'
-import StopWatchContext from '../../StopWatchContext'
-import { useContext } from 'react'
-
-export default function Timer() {
-	const { stopwatchTime } = useContext(StopWatchContext)
-
-	return <div>{stopwatchTime ? stopwatchTime : '00:00.00'}</div>
+export default function Timer({ stopwatchTime }) {
+	return (
+		<div className='stopwatchTime'>
+			<span id='stopWatchClock' data-id='stopWatchClock'>
+				<div>{stopwatchTime ? stopwatchTime : '00:00.00'}</div>
+			</span>
+		</div>
+	)
 }
