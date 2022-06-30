@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { getFormattedTime } from '../../utils/Formatter'
 
 export default function Buttons({
@@ -14,19 +14,17 @@ export default function Buttons({
 	const requestRef = useRef()
 	const previousTimeRef = useRef()
 	const start = Date.now()
-
 	const stopwatchClock = () => {
 		if (previousTimeRef.current != undefined) {
 			setstopwatchTime(getFormattedTime(Date.now() - start + previousTime))
 		}
 		setPreviousTime(Date.now() - start + previousTime)
 		previousTimeRef.current = start
-		requestRef.current = requestAnimationFrame(stopwatchClock)
 	}
 	useEffect(() => {
 		if (startStop) {
-			requestRef.current = requestAnimationFrame(stopwatchClock)
-			return () => cancelAnimationFrame(requestRef.current)
+			requestRef.current = setInterval(stopwatchClock)
+			return () => clearInterval(requestRef.current)
 		}
 	}, [startStop])
 
