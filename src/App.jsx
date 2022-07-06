@@ -7,25 +7,10 @@ import Laps from './components/Laps/Laps.jsx'
 //replace previousTime
 
 function App() {
-	{
-		/*1*/
-	}
 	const [isTimerRunning, setIsTimerRunning] = useState(false)
-	{
-		/*2*/
-	}
 	const [stopWatchTime, setStopWatchTime] = useState(0)
-	{
-		/*3*/
-	}
 	const [previousTime, setPreviousTime] = useState(0)
-	{
-		/*4*/
-	}
 	const [lapItems, setLapItems] = useState([])
-	{
-		/*5*/
-	}
 	const [fastestAndSlowestLapTime, setFastestAndSlowestLapTime] = useState([])
 
 	let startTime = Date.now()
@@ -47,12 +32,10 @@ function App() {
 	//onLap
 	const onLapButtonClick = () => {
 		if (isTimerRunning) {
-			console.log('lap')
 			incrementLaps()
 			if (lapItems.length > 3) {
 			}
 		} else {
-			console.log('reset')
 			setPreviousTime(0)
 			setStopWatchTime(0)
 			setLapItems([])
@@ -69,7 +52,6 @@ function App() {
 		let lapTime = calculateCurrentLapTime()
 		let fastOrSlow = findFastestAndSlowestLap(lapTime, lapNumber)
 		setLapItems([{ lap: lapNumber, time: lapTime, fastOrSlow: fastOrSlow }, ...lapItems])
-		//console.log(lapItems)
 	}
 
 	const findFastestAndSlowestLap = (lapTime, lapNumber) => {
