@@ -25,4 +25,3 @@ export default function Laps({ calculateCurrentLapTime, lapItems, stopWatchTime 
 		</div>
 	)
 }
-// lapItems.length < 9 ?

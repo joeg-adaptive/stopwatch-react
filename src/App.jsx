@@ -20,21 +20,20 @@ function App() {
 				setStopWatchTime(Date.now() - (startTime - previousTime))
 			}, 1000 / 16)
 			return () => clearInterval(intervalId)
-		} else if (!isTimerRunning) {
-			setPreviousTime(stopWatchTime)
 		}
-	}, [isTimerRunning])
+	}, [isTimerRunning, previousTime])
 
 	//onStart
 	const onStartButtonClick = () => {
 		setIsTimerRunning(!isTimerRunning)
+		if (!isTimerRunning) {
+			setPreviousTime(stopWatchTime)
+		}
 	}
 	//onLap
 	const onLapButtonClick = () => {
 		if (isTimerRunning) {
 			incrementLaps()
-			if (lapItems.length > 3) {
-			}
 		} else {
 			setPreviousTime(0)
 			setStopWatchTime(0)
@@ -60,7 +59,9 @@ function App() {
 
 		if (lapTime > fastestAndSlowestLapTime.slowestTime || fastestAndSlowestLapTime.slowestTime == null) {
 			//Search for previous to remove attribute
+
 			previousFastOrSlow = lapItems.find((lap) => lap.fastOrSlow === 'slow')
+			//How to do this without Mutating state?
 			previousFastOrSlow ? (previousFastOrSlow['fastOrSlow'] = null) : null
 			//Assign New fastest Lap
 			setFastestAndSlowestLapTime({ ...fastestAndSlowestLapTime, slowestLapNumber: lapNumber, slowestTime: lapTime })
@@ -69,6 +70,7 @@ function App() {
 		if (lapTime < fastestAndSlowestLapTime.fastestTime || fastestAndSlowestLapTime.fastestTime == null) {
 			//Search for previous to remove attribute
 			previousFastOrSlow = lapItems.find((lap) => lap.fastOrSlow === 'fast')
+			//How to do this without Mutating state?
 			previousFastOrSlow ? (previousFastOrSlow['fastOrSlow'] = null) : null
 			//Assign New fastest Lap
 			setFastestAndSlowestLapTime({ ...fastestAndSlowestLapTime, fastestLapNumber: lapNumber, fastestTime: lapTime })
