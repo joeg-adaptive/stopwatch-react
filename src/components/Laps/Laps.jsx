@@ -6,7 +6,7 @@ export default function Laps({ calculateCurrentLapTime, lapItems, stopWatchTime 
 	return (
 		<div className='stopWatchLaps' data-id='stopWatchLaps'>
 			{stopWatchTime > 0 ? (
-				<LiveLapItem howManyLaps={lapItems.length + 1} calculateCurrentLapTime={calculateCurrentLapTime} />
+				<LiveLapItem howManyLaps={lapItems?.length + 1} calculateCurrentLapTime={calculateCurrentLapTime} />
 			) : (
 				<></>
 			)}
@@ -19,7 +19,7 @@ export default function Laps({ calculateCurrentLapTime, lapItems, stopWatchTime 
 					howManyLaps={lapItems.length + 1}
 				/>
 			))}
-			{Array.from({ length: 8 - lapItems.length }, () => (
+			{Array.from({ length: 8 - lapItems?.length }, () => (
 				<BlankLaps />
 			))}
 		</div>

@@ -53,27 +53,33 @@ function App() {
 		setLapItems([{ lap: lapNumber, time: lapTime, fastOrSlow: fastOrSlow }, ...lapItems])
 	}
 
+	//if the slowest lap is the first lap it does not update, because the fastest lap over rides it
 	const findFastestAndSlowestLap = (lapTime, lapNumber) => {
 		let fastOrSlow = null
-		let previousFastOrSlow = null
-
 		if (lapTime > fastestAndSlowestLapTime.slowestTime || fastestAndSlowestLapTime.slowestTime == null) {
-			//Search for previous to remove attribute
-
-			previousFastOrSlow = lapItems.find((lap) => lap.fastOrSlow === 'slow')
-			//How to do this without Mutating state?
-			previousFastOrSlow ? (previousFastOrSlow['fastOrSlow'] = null) : null
-			//Assign New fastest Lap
-			setFastestAndSlowestLapTime({ ...fastestAndSlowestLapTime, slowestLapNumber: lapNumber, slowestTime: lapTime })
+			setLapItems((prevState) => {
+				prevState && [
+					...prevState.map((lap, index) => {
+						if (lap.fastOrSlow === 'slow') {
+							lap.fastOrSlow = null
+						}
+					}),
+				]
+			})
+			setFastestAndSlowestLapTime((prevState) => ({ ...prevState, slowestLapNumber: lapNumber, slowestTime: lapTime }))
 			fastOrSlow = 'slow'
 		}
 		if (lapTime < fastestAndSlowestLapTime.fastestTime || fastestAndSlowestLapTime.fastestTime == null) {
-			//Search for previous to remove attribute
-			previousFastOrSlow = lapItems.find((lap) => lap.fastOrSlow === 'fast')
-			//How to do this without Mutating state?
-			previousFastOrSlow ? (previousFastOrSlow['fastOrSlow'] = null) : null
-			//Assign New fastest Lap
-			setFastestAndSlowestLapTime({ ...fastestAndSlowestLapTime, fastestLapNumber: lapNumber, fastestTime: lapTime })
+			setLapItems((prevState) => {
+				prevState && [
+					...prevState.map((lap, index) => {
+						if (lap.fastOrSlow === 'fast') {
+							lap.fastOrSlow = null
+						}
+					}),
+				]
+			})
+			setFastestAndSlowestLapTime((prevState) => ({ ...prevState, fastestLapNumber: lapNumber, fastestTime: lapTime }))
 			fastOrSlow = 'fast'
 		}
 		return fastOrSlow

@@ -13,3 +13,13 @@ export default function LapItem({ lapNumber, lapTime, fastOrSlow, howManyLaps })
 		</div>
 	)
 }
+
+// if (howManyLaps > 3) {
+// 	if(fastOrSlow ==='fast'){
+// 		style 'lapsFastest'
+// 	}
+// 	if(fastOrSlow ==='slow'){
+// 		style 'lapslowest'
+// 	}
+
+// }
