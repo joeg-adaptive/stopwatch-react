@@ -3,39 +3,30 @@ import Timer from './components/Timer/Timer.jsx'
 import Buttons from './components/Buttons/Buttons.jsx'
 import Laps from './components/Laps/Laps.jsx'
 
-//invisible laps on initilization
-//replace previousTime
-
 function App() {
 	const [isTimerRunning, setIsTimerRunning] = useState(false)
 	const [stopWatchTime, setStopWatchTime] = useState(0)
-	const [previousTime, setPreviousTime] = useState(0)
 	const [lapItems, setLapItems] = useState([])
 	const [fastestAndSlowestLapTime, setFastestAndSlowestLapTime] = useState([])
 
-	let startTime = Date.now()
 	useEffect(() => {
 		if (isTimerRunning) {
+			const startTime = Date.now() - stopWatchTime
 			const intervalId = setInterval(() => {
-				setStopWatchTime(Date.now() - (startTime - previousTime))
+				setStopWatchTime(Date.now() - startTime)
 			}, 1000 / 16)
 			return () => clearInterval(intervalId)
 		}
-	}, [isTimerRunning, previousTime])
+	}, [isTimerRunning])
 
-	//onStart
 	const onStartButtonClick = () => {
 		setIsTimerRunning(!isTimerRunning)
-		if (!isTimerRunning) {
-			setPreviousTime(stopWatchTime)
-		}
 	}
-	//onLap
+
 	const onLapButtonClick = () => {
 		if (isTimerRunning) {
 			incrementLaps()
 		} else {
-			setPreviousTime(0)
 			setStopWatchTime(0)
 			setLapItems([])
 			setFastestAndSlowestLapTime([])
@@ -49,40 +40,42 @@ function App() {
 	const incrementLaps = () => {
 		let lapNumber = lapItems.length + 1
 		let lapTime = calculateCurrentLapTime()
-		let fastOrSlow = findFastestAndSlowestLap(lapTime, lapNumber)
-		setLapItems([{ lap: lapNumber, time: lapTime, fastOrSlow: fastOrSlow }, ...lapItems])
+		let fast = findFastestLap(lapTime, lapNumber)
+		let slow = findSlowestLap(lapTime, lapNumber)
+		setLapItems([{ lap: lapNumber, time: lapTime, fast: fast, slow: slow }, ...lapItems])
 	}
 
-	//if the slowest lap is the first lap it does not update, because the fastest lap over rides it
-	const findFastestAndSlowestLap = (lapTime, lapNumber) => {
-		let fastOrSlow = null
-		if (lapTime > fastestAndSlowestLapTime.slowestTime || fastestAndSlowestLapTime.slowestTime == null) {
-			setLapItems((prevState) => {
-				prevState && [
-					...prevState.map((lap, index) => {
-						if (lap.fastOrSlow === 'slow') {
-							lap.fastOrSlow = null
-						}
-					}),
-				]
-			})
-			setFastestAndSlowestLapTime((prevState) => ({ ...prevState, slowestLapNumber: lapNumber, slowestTime: lapTime }))
-			fastOrSlow = 'slow'
-		}
+	const findFastestLap = (lapTime, lapNumber) => {
 		if (lapTime < fastestAndSlowestLapTime.fastestTime || fastestAndSlowestLapTime.fastestTime == null) {
 			setLapItems((prevState) => {
 				prevState && [
-					...prevState.map((lap, index) => {
-						if (lap.fastOrSlow === 'fast') {
-							lap.fastOrSlow = null
+					...prevState.map((lap) => {
+						if (lap.fast === true) {
+							lap.fast = false
 						}
 					}),
 				]
 			})
 			setFastestAndSlowestLapTime((prevState) => ({ ...prevState, fastestLapNumber: lapNumber, fastestTime: lapTime }))
-			fastOrSlow = 'fast'
+			return true
 		}
-		return fastOrSlow
+		return false
+	}
+	const findSlowestLap = (lapTime, lapNumber) => {
+		if (lapTime > fastestAndSlowestLapTime.slowestTime || fastestAndSlowestLapTime.slowestTime == null) {
+			setLapItems((prevState) => {
+				prevState && [
+					...prevState.map((lap) => {
+						if (lap.slow === true) {
+							lap.slow = false
+						}
+					}),
+				]
+			})
+			setFastestAndSlowestLapTime((prevState) => ({ ...prevState, slowestLapNumber: lapNumber, slowestTime: lapTime }))
+			return true
+		}
+		return false
 	}
 
 	return (

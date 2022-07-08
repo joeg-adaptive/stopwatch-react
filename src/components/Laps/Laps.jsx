@@ -4,7 +4,7 @@ import BlankLaps from './BlankLaps'
 
 export default function Laps({ calculateCurrentLapTime, lapItems, stopWatchTime }) {
 	return (
-		<div className='stopWatchLaps' data-id='stopWatchLaps'>
+		<div className='stopWatchLaps'>
 			{stopWatchTime > 0 ? (
 				<LiveLapItem howManyLaps={lapItems?.length + 1} calculateCurrentLapTime={calculateCurrentLapTime} />
 			) : (
@@ -15,12 +15,13 @@ export default function Laps({ calculateCurrentLapTime, lapItems, stopWatchTime 
 					key={lap.lap}
 					lapNumber={lap.lap}
 					lapTime={lap.time}
-					fastOrSlow={lap.fastOrSlow}
+					fast={lap.fast}
+					slow={lap.slow}
 					howManyLaps={lapItems.length + 1}
 				/>
 			))}
-			{Array.from({ length: 8 - lapItems?.length }, () => (
-				<BlankLaps />
+			{Array.from({ length: 8 - lapItems?.length }, (_, index) => (
+				<BlankLaps key={index} />
 			))}
 		</div>
 	)

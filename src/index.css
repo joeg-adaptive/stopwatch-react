@@ -27,7 +27,7 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-.stopwatchTime span {
+.stopwatchClock {
 	font-family: sans-serif-custom;
 	font-weight: lighter;
 	font-size: 75px;
