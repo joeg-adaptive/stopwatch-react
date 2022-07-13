@@ -1,0 +1,21 @@
+.stopwatchTime {
+	flex: 45%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.stopwatchClock {
+	font-family: sans-serif-custom;
+	font-weight: lighter;
+	font-size: 75px;
+	font-variant-numeric: tabular-nums;
+}
+@media only screen and (max-width: 390px) {
+	.stopwatchTime span {
+		font-size: 19vw;
+	}
+}
+
+.stopwatchTime h1 {
+	text-align: center;
+}

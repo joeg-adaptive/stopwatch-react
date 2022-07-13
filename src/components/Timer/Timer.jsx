@@ -1,4 +1,5 @@
 import React from 'react'
+import './Timer.css'
 import { getFormattedTime } from '../../utils/Formatter'
 
 export default function Timer({ stopWatchTime }) {

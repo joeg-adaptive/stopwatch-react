@@ -1,0 +1,53 @@
+.stopWatchLaps {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	flex: 45%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-y: scroll;
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
+}
+
+.flexLapRow {
+	min-height: 2.1rem;
+	border-top: 1px solid #6f6f70;
+	width: 95%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flexLapRow:last-of-type {
+	border-bottom: 1px solid #6f6f70;
+}
+.flexLap {
+}
+.flexTime {
+}
+
+.lapsSlowest {
+	color: #ff3b30;
+}
+
+.lapsFastest {
+	color: #30d158;
+}
+::-webkit-scrollbar {
+	background-color: black;
+	width: 0.35vw;
+	border-radius: 10px;
+}
+::-webkit-scrollbar-corner {
+	background-color: black;
+}
+::-webkit-scrollbar-track {
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+	background-color: #6f6f70;
+	border-radius: 10px;
+}

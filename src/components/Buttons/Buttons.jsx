@@ -1,4 +1,5 @@
 import React from 'react'
+import './Buttons.css'
 
 export default function Buttons({ onLapButtonClick, onStartButtonClick, isTimerRunning }) {
 	return (
@@ -6,10 +7,7 @@ export default function Buttons({ onLapButtonClick, onStartButtonClick, isTimerR
 			<button className='reset' onClick={() => onLapButtonClick()}>
 				{isTimerRunning ? 'Lap' : 'Reset'}
 			</button>
-			<button
-				className={isTimerRunning ? 'stop' : 'start'}
-				onClick={() => onStartButtonClick()}
-			>
+			<button className={isTimerRunning ? 'stop' : 'start'} onClick={() => onStartButtonClick()}>
 				{isTimerRunning ? 'Stop' : 'Start'}
 			</button>
 		</div>
